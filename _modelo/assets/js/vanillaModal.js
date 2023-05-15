@@ -306,7 +306,7 @@ var VanillaModal = (function () {
       value: function OutsideClickHandler(e) {
         if (this.$$.clickOutside !== true) return;
         var node = e.target;
-        while (node != document.body) {
+        while (node !== document.body) {
           if (node === this.$.modalInner) return;
           node = node.parentNode;
         }

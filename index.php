@@ -2,5 +2,7 @@
     require 'config.php';
     require 'models/Auth.php';
 
-    $auth = new Auth($pdo, $base);
+    /** @var object $pdo **/
+    /** @var object $base **/
 
+    $auth = new Auth($pdo, $base);
