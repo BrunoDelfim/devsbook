@@ -6,3 +6,5 @@
     /** @var object $base **/
 
     $auth = new Auth($pdo, $base);
+
+    // apenas um teste
