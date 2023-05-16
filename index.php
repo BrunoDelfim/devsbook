@@ -1,4 +1,5 @@
 <?php
+
     require 'config.php';
     require 'models/Auth.php';
 
@@ -6,5 +7,6 @@
     /** @var object $base **/
 
     $auth = new Auth($pdo, $base);
+    $userInfo = $auth->checkToken();
 
-    // apenas um teste2
+    echo 'index';
