@@ -21,7 +21,13 @@ if ($email && $password) {
         exit;
     }
 }
+
+if ($email && $password) {
+    $_SESSION['flash'] = "E-mail e/ou senha inválidos(as)";
+} else {
+    $_SESSION['flash'] = "E-mail e/ou senha não preenchidos(as)";
+}
 // caso o login não for validado com sucesso retorna o usuário para a página de login
 header("Location: ".$base."/login.php");
-// encerra a execuçã
+// encerra a execução
 exit;

@@ -6,7 +6,7 @@
     padding: 0;
 }
 body {
-    font-family: Helvetica;
+    font-family: Helvetica, Arial, serif;
     font-size:13px;
     background-color:#edeef0;
     margin:0;
@@ -82,4 +82,10 @@ form .button:hover {
 form a {
     text-decoration:none;
     color:#4a76a8;
+}
+.login-invalido {
+    color: #4A76A8;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
 }

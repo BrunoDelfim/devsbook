@@ -27,6 +27,12 @@ require 'config.php';
         </label>
         <label>
             <input placeholder="Digite sua senha" class="input" type="password" name="password" />
+            <?php
+                if (!empty($_SESSION['flash'])) {
+                    echo "<p class="."login-invalido" . ">".$_SESSION['flash']."</p>";
+                    unset($_SESSION['flash']);
+                }
+            ?>
         </label>
         <label>
             <input class="button" type="submit" value="Acessar o sistema" />
