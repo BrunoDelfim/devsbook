@@ -32,20 +32,29 @@ class Auth {
         exit;
     }
 
-    public function validateLogin($email, $password)
+    public function validateLogin($email, $password): bool
     {
+        // cria objeto userDaoMysql
         $userDao = new UserDaoMysql($this->pdo);
+        // executa o método para encontrar o usuário pelo email informado
         $user = $userDao->findByEmail($email);
+        // se o email for válido e existente no banco de dados
         if ($user) {
-            if ($password_verify($password, $user->password)) {
+            // verifica se senha está correta
+            if (password_verify($password, $user->password)) {
+                // gera o token
                 $token = md5(time().rand(0, 9999));
+                // armazena o token na sessão 'token'
                 $_SESSION['token'] = $token;
+                // define o token do usuário no objeto usuário
                 $user->token = $token;
+                // atualiza as informações do usuário logado
                 $userDao->update($user);
+                // retorna verdadeiro
                 return true;
             }
         }
+        // se não encontrar o e-mail informado no banco de dados, retorna falso
         return false;
     }
-
 }

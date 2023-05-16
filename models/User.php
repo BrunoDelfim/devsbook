@@ -19,6 +19,8 @@
     interface UserDAO {
         // método para encontrar o usuário pelo token
         public function findByToken($token);
+        // método para encontrar o usuário por email
         public function findByEmail($email);
+        // método para definir as informações do usuário
         public function update(User $u);
     }

@@ -28,8 +28,11 @@ require 'config.php';
         <label>
             <input placeholder="Digite sua senha" class="input" type="password" name="password" />
             <?php
+                // Se $_SESSION['flash'] não estiver vazia
                 if (!empty($_SESSION['flash'])) {
+                    // exibe mensagem de erro
                     echo "<p class="."login-invalido" . ">".$_SESSION['flash']."</p>";
+                    // limpa $_SESSION['flash']
                     unset($_SESSION['flash']);
                 }
             ?>

@@ -31,7 +31,7 @@ class UserDaoMysql implements UserDAO {
     }
 
     // método implementado via UserDAO que verfica o token
-    public function findByToken($token)
+    public function findByToken($token): ?bool
     {
         // se o token estiver preenchido
         if ($token) {
@@ -53,7 +53,7 @@ class UserDaoMysql implements UserDAO {
         return false;
     }
 
-    public function findByEmail($email)
+    public function findByEmail($email): ?bool
     {
         // se o token estiver preenchido
         if ($email) {
@@ -77,6 +77,7 @@ class UserDaoMysql implements UserDAO {
 
     public function update(User $u)
     {
+        // prepara a atualização do usuário no banco de dados de acordo com o token
         $sql = $this->pdo->prepare("UPDATE users SET
             email = :email,
             password = :password,
