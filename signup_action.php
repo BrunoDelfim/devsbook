@@ -27,8 +27,12 @@ if ($name && $email && $password && $birthdate) {
         header("Location: ".$base."/signup.php");
         exit;
     }
-    if ($auth->emailExists($email)) {
-
+    if ($auth->emailExists($email) === false) {
+        $auth->registerUser($name, $email, $password, $birthdate);
+        header("Location: ".$base);
+        exit;
+    } else {
+        $_SESSION['flash'] = "E-mail já cadastrado";
     }
 }
 
