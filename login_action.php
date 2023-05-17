@@ -25,10 +25,10 @@ if ($email && $password) {
 // se $email e $password não estiverem vazios
 if ($email && $password) {
     // define mensagem como:
-    $_SESSION['flash'] = "E-mail e/ou senha inválidos(as)";
+    $_SESSION['flash'] = 'E-mail e/ou senha inválidos(as)';
 } else {
     // caso $email e $password forem nulos define mensagem como:
-    $_SESSION['flash'] = "E-mail e/ou senha não preenchidos(as)";
+    $_SESSION['flash'] = 'E-mail e/ou senha não preenchidos(as)';
 }
 // caso o login não for validado com sucesso retorna o usuário para a página de login
 header("Location: ".$base."/login.php");
