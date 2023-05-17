@@ -4,7 +4,7 @@
 
     $base = 'http://localhost/devsbookoo';
 
-    $db_name = 'devsbookoo';
+    $db_name = 'devsbook';
     $db_host = 'localhost';
     $db_user = 'root';
     $db_password = '';
