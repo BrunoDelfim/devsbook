@@ -57,4 +57,10 @@ class Auth {
         // se não encontrar o e-mail informado no banco de dados, retorna falso
         return false;
     }
+
+    public function emailExists($email)
+    {
+        $userDao = new UserDaoMysql($this->pdo);
+        return (bool)$userDao->findByEmail($email);
+    }
 }

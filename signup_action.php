@@ -21,6 +21,15 @@ if ($name && $email && $password && $birthdate) {
         header("Location: ".$base."/signup.php");
         exit;
     }
+    $birthdate = $birthdate[2].'-'.$birthdate[1].'-'.$birthdate[0];
+    if (strtotime($birthdate) === false) {
+        $_SESSION['flash'] = 'Data de nascimento inválida';
+        header("Location: ".$base."/signup.php");
+        exit;
+    }
+    if ($auth->emailExists($email)) {
+
+    }
 }
 
 // se $email e $password não estiverem vazios
