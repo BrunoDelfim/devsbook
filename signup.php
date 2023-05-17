@@ -10,7 +10,7 @@ require 'config.php';
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>Cadastre-se</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?=$base."/";?>assets/css/login.css" />
 </head>
@@ -21,27 +21,28 @@ require 'config.php';
         </div>
     </header>
     <section class="container main">
-        <form method="POST" action="<?=$base."/";?>login_action.php">
+        <form method="POST" action="<?=$base."/";?>signup_action.php">
+            <label>
+                <input placeholder="Digite seu nome completo" class="input" type="text" name="name" />
+            </label>
             <label>
                 <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
             </label>
             <label>
                 <input placeholder="Digite sua senha" class="input" type="password" name="password" />
-                <?php
-                    // Se $_SESSION['flash'] não estiver vazia
-                    if (!empty($_SESSION['flash'])) {
-                        // exibe mensagem de erro
-                        echo "<p class="."login-invalido" . ">".$_SESSION['flash']."</p>";
-                        // limpa $_SESSION['flash']
-                        unset($_SESSION['flash']);
-                    }
-                ?>
             </label>
             <label>
-                <input class="button" type="submit" value="Acessar o sistema" />
+                <input placeholder="Insira sua data de nascimento" class="input" type="text" name="birthdate" id="birthdate"/>
             </label>
-            <a href="<?=$base."/";?>signup.php">Ainda não tem conta? Cadastre-se</a>
+            <label>
+                <input class="button" type="submit" value="Cadastrar" />
+            </label>
+            <a href="<?=$base."/";?>login.php">Já tem conta? Faça login</a>
         </form>
     </section>
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        IMask(document.getElementById("birthdate"),{mask:'00/00/0000'});
+    </script>
 </body>
 </html>
