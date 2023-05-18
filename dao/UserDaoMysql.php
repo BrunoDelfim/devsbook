@@ -52,6 +52,7 @@ class UserDaoMysql implements UserDAO {
                 return $user;
             }
         }
+        // caso o token informado não seja encontrado retorna falso
         return false;
     }
 
@@ -74,6 +75,7 @@ class UserDaoMysql implements UserDAO {
                 return $user;
             }
         }
+        // caso não o e-mail informado não seja encontrado retorna falso
         return false;
     }
 
@@ -91,6 +93,7 @@ class UserDaoMysql implements UserDAO {
             cover = :cover,
             token = :token
             WHERE id = :id");
+        // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
         $sql->bindValue(':password', $u->password);
         $sql->bindValue(':name', $u->name);
@@ -101,24 +104,31 @@ class UserDaoMysql implements UserDAO {
         $sql->bindValue(':cover', $u->cover);
         $sql->bindValue(':token', $u->token);
         $sql->bindValue(':id', $u->id);
+        // executa a consulta sql
         $sql->execute();
+        // retorna verdadeiro
         return true;
     }
 
+    // método que insere novos usuários no banco de dados
     public function insert(User $u)
     {
+        // prepara a inserção sql
         $sql = $this->pdo->prepare("INSERT INTO users (
             email, password, name, birthdate, token,city, work, avatar, cover   
     ) VALUES (
             :email, :password, :name, :birthdate, :token,
               default, default, default, default
     )");
+        // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
         $sql->bindValue(':password', $u->password);
         $sql->bindValue(':name', $u->name   );
         $sql->bindValue(':birthdate', $u->birthdate);
         $sql->bindValue(':token', $u->token);
+        // executa o sql
         $sql->execute();
+        // retorna verdadeiro
         return true;
     }
 }
