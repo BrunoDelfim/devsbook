@@ -6,12 +6,14 @@ class Auth {
     // criando as variáveis para armazenar os dados recebidos
     private $pdo;
     private $base;
+    private $dao;
 
     // método que que recebe os valores de $pdo e $base e armazena nas variáveis privadas
     public function __construct(PDO $pdo, $base)
     {
         $this->pdo = $pdo;
         $this->base = $base;
+        $this->dao = new UserDaoMysql($this->pdo);
     }
 
     // verifica o estado do token de acesso
@@ -21,8 +23,7 @@ class Auth {
         if(!empty($_SESSION['token'])){
             // armazena o valor do token na variável $token
             $token = $_SESSION['token'];
-            $userDao = new UserDaoMysql($this->pdo);
-            $user = $userDao->findByToken($token);
+            $user = $this->dao->findByToken($token);
             if ($user) {
                 return $user;
             }
@@ -35,10 +36,8 @@ class Auth {
 
     public function validateLogin($email, $password):bool
     {
-        // cria objeto userDaoMysql
-        $userDao = new UserDaoMysql($this->pdo);
         // executa o método para encontrar o usuário pelo email informado
-        $user = $userDao->findByEmail($email);
+        $user = $this->dao->findByEmail($email);
         // se o email for válido e existente no banco de dados
         if ($user) {
             // verifica se senha está correta
@@ -50,7 +49,7 @@ class Auth {
                 // define o token do usuário no objeto usuário
                 $user->token = $token;
                 // atualiza as informações do usuário logado
-                $userDao->update($user);
+                $this->dao->update($user);
                 // retorna verdadeiro
                 return true;
             }
@@ -63,17 +62,13 @@ class Auth {
     // método para verificar se o e-mail informado já existe
     public function emailExists($email)
     {
-        // cria o objeto e passa o objeto pdo
-        $userDao = new UserDaoMysql($this->pdo);
         // retorna se o e-mai foi encontrado, fazendo o uso do método procurar por e-mail existente na classe UserDaoMysql
-        return $userDao->findByEmail($email);
+        return $this->dao->findByEmail($email);
     }
 
     // método que registra novo usuário
     public function registerUser($name, $email, $password, $birthdate)
     {
-        // cria o objeto passando o objeto pdo
-        $userDao = new UserDaoMysql($this->pdo);
         // cria o objeto usuário
         $newUser = new User();
         // define o hash que será gerado a partir da senha informada
@@ -87,7 +82,7 @@ class Auth {
         $newUser->birthdate = $birthdate;
         $newUser->token = $token;
         // passa o objeto usuário para o método insert da classe UserDaoMysql
-        $userDao->insert($newUser);
+        $this->dao->insert($newUser);
         // define o token da sessão
         $_SESSION['token'] = $token;
     }
