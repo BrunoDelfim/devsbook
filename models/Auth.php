@@ -60,24 +60,35 @@ class Auth {
         return false;
     }
 
+    // método para verificar se o e-mail informado já existe
     public function emailExists($email)
     {
+        // cria o objeto e passa o objeto pdo
         $userDao = new UserDaoMysql($this->pdo);
+        // retorna se o e-mai foi encontrado, fazendo o uso do método procurar por e-mail existente na classe UserDaoMysql
         return $userDao->findByEmail($email);
     }
 
+    // método que registra novo usuário
     public function registerUser($name, $email, $password, $birthdate)
     {
+        // cria o objeto passando o objeto pdo
         $userDao = new UserDaoMysql($this->pdo);
+        // cria o objeto usuário
         $newUser = new User();
+        // define o hash que será gerado a partir da senha informada
         $hash = password_hash($password, PASSWORD_DEFAULT);
+        // define o token da sessão usando md5
         $token = md5(time().rand(0, 9999));
+        // define as informações do objeto usário criado
         $newUser->name = $name;
         $newUser->email = $email;
         $newUser->password = $hash;
         $newUser->birthdate = $birthdate;
         $newUser->token = $token;
+        // passa o objeto usuário para o método insert da classe UserDaoMysql
         $userDao->insert($newUser);
+        // define o token da sessão
         $_SESSION['token'] = $token;
     }
 }
