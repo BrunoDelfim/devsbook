@@ -38,8 +38,8 @@ if ($name && $email && $password && $birthdate) {
 // se $email, $password, $email e $birthdate estiverem vazios
 if (!$name || !$email || !$password || !$birthdate) {
     $_SESSION['flash'] = 'Preencha todos os campos!';
-}
-// caso o login não for validado com sucesso retorna o usuário para a página de login
-header("Location: ".$base."/signup.php");
+    // caso o login não for validado com sucesso retorna o usuário para a página de login
+    header("Location: ".$base."/signup.php");
 // encerra a execução
-exit;
+    exit;
+}
