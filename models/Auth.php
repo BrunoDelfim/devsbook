@@ -33,7 +33,7 @@ class Auth {
         exit;
     }
 
-    public function validateLogin($email, $password)
+    public function validateLogin($email, $password):bool
     {
         // cria objeto userDaoMysql
         $userDao = new UserDaoMysql($this->pdo);
