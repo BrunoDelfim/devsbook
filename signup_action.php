@@ -22,7 +22,7 @@ if ($name && $email && $password && $birthdate) {
         exit;
     }
     $birthdate = $birthdate[2].'-'.$birthdate[1].'-'.$birthdate[0];
-    if (strtotime($birthdate) === false) {
+    if (strtotime($birthdate) === false || strtotime($birthdate) <= 1930-01-01) {
         $_SESSION['flash'] = 'Data de nascimento inválida';
         header("Location: ".$base."/signup.php");
         exit;
@@ -38,8 +38,9 @@ if ($name && $email && $password && $birthdate) {
 // se $email, $password, $email e $birthdate estiverem vazios
 if (!$name || !$email || !$password || !$birthdate) {
     $_SESSION['flash'] = 'Preencha todos os campos!';
-    // caso o login não for validado com sucesso retorna o usuário para a página de login
-    header("Location: ".$base."/signup.php");
-// encerra a execução
-    exit;
 }
+
+// caso o login não for validado com sucesso retorna o usuário para a página de login
+header("Location: ".$base."/signup.php");
+// encerra a execução
+exit;

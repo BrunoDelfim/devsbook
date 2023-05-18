@@ -26,13 +26,14 @@ class Auth {
             if ($user) {
                 return $user;
             }
+            return false;
         }
         // se o token for vazio, redireciona para a página login.php
         header("Location: ".$this->base."/login.php");
         exit;
     }
 
-    public function validateLogin($email, $password): bool
+    public function validateLogin($email, $password)
     {
         // cria objeto userDaoMysql
         $userDao = new UserDaoMysql($this->pdo);
@@ -54,6 +55,7 @@ class Auth {
                 return true;
             }
         }
+        $_SESSION['flash'] = 'E-mail e/ou senha incorretos(as)';
         // se não encontrar o e-mail informado no banco de dados, retorna falso
         return false;
     }
