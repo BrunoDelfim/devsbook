@@ -16,7 +16,7 @@
 <header>
     <div class="container">
         <div class="logo">
-            <a href=""><img src="<?=$base."/"?>assets/images/devsbook_logo.png" /></a>
+            <a href="<?=$base?>"><img src="<?=$base."/"?>assets/images/devsbook_logo.png"  alt="Logo-Devsbook"/></a>
         </div>
         <div class="head-side">
             <div class="head-side-left">
@@ -29,16 +29,17 @@
                 </div>
             </div>
             <div class="head-side-right">
-                <a href="" class="user-area">
-                    <div class="user-area-text">Bonieky</div>
+                <a href="<?=$base."/"?>perfil.php" class="user-area">
+                    <div class="user-area-text">Bruno</div>
                     <div class="user-area-icon">
-                        <img src="<?=$base."/"?>media/avatars/avatar.jpg"  alt=""/>
+                        <img src="<?=$base."/"?>media/avatars/avatar.jpg"  alt="avatar"/>
                     </div>
                 </a>
                 <a href="<?=$base."/"?>logout.php" class="user-logout">
-                    <img src="<?=$base."/"?>assets/images/power_white.png"  alt=""/>
+                    <img src="<?=$base."/"?>assets/images/power_white.png"  alt="logout-icon"/>
                 </a>
             </div>
         </div>
     </div>
 </header>
+<section class="container main">
