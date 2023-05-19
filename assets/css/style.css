@@ -219,6 +219,9 @@ header .head-side {
     height:50px;
     border-radius:50%;
 }
+.arrow-send-feed {
+    opacity: initial;
+}
 .feed-new-input-placeholder {
     flex:1;
     font-size:14px;
