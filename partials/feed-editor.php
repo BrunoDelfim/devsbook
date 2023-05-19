@@ -27,8 +27,23 @@
     let feedInput = document.querySelector('.feed-new-input');
     let feedSubmit = document.querySelector('.feed-new-send');
     let feedForm = document.querySelector('.feed-new-form');
+    let initial_value = feedInput.innerText.trim();
+
+    feedInput.addEventListener('input', () => {
+        let value = feedInput.innerText.trim();
+        if (value !== initial_value) {
+            feedSubmit.style.cursor = 'pointer';
+        } else {
+            feedSubmit.style.cursor = 'default';
+        }
+    });
     feedSubmit.addEventListener('click', () => {
-        feedForm.querySelector('input[name=body]').value = feedInput.innerText.trim();
-        feedForm.submit();
+        let value = feedInput.innerText.trim();
+        if (value === initial_value) {
+            feedSubmit.preventDefault();
+        } else {
+            feedForm.querySelector('input[name=body]').value = value;
+            feedForm.submit();
+        }
     });
 </script>
