@@ -115,10 +115,10 @@ class UserDaoMysql implements UserDAO {
     {
         // prepara a inserção sql
         $sql = $this->pdo->prepare("INSERT INTO users (
-            email, password, name, birthdate, token,city, work, avatar, cover   
+            email, password, name, birthdate, token, city, work, avatar, cover   
     ) VALUES (
             :email, :password, :name, :birthdate, :token,
-              default, default, default, default
+              default, default, 'default.jpg', 'cover.jpg'
     )");
         // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
