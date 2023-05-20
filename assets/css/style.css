@@ -206,10 +206,8 @@ header .head-side {
     flex:none;
     width:250px;
 }
-
-
 .feed-new-editor {
-    align-items: center;
+    /*align-items: center;*/
 }
 .feed-new-avatar {
     margin-right:10px;
@@ -223,24 +221,29 @@ header .head-side {
     opacity: initial;
 }
 .feed-new-input-placeholder {
-    flex:1;
-    font-size:14px;
-    color:#333;
-}
-.feed-new-input {
-    flex:1;
     outline:0;
     border:0;
     font-size:14px;
-    display: none;
     color:#333;
+    width: 99%;
+    resize: none;
+    font-family: 'Arial', 'Roboto', sans-serif;
+    margin-top: 17px;
+    margin-bottom: 15px;
+}
+.feed-new-input {
+    flex:1;
 }
 .feed-new-send {
+    display: flex;
     margin-right:5px;
+    align-items: end;
 }
-.feed-new-send img {
-    width:25px;
-    height:25px;
+.send-arrow-feed {
+    margin-top: 13px;
+    margin-bottom: 13px;
+    width: 25px;
+    height: 25px;
 }
 
 .banners .box-body {
