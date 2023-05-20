@@ -36,8 +36,11 @@ let arrowSendFeed = document.querySelector('.send-arrow-feed');
 let content = document.querySelector('.feed-new-input-placeholder');
 
 (function () {
-    arrowSendFeed.style.cursor = 'default';
-    arrowSendFeed.style.opacity = '0.3';
+    let value = content.value.trim();
+    if (value === initial_value || value === '') {
+        arrowSendFeed.style.cursor = 'default';
+        arrowSendFeed.style.opacity = '0.3';
+    }
 })();
 
 content.addEventListener('input', function() {
