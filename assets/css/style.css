@@ -238,9 +238,8 @@ header .head-side {
     flex:1;
 }
 .feed-new-send {
-    display: flex;
     margin-right:5px;
-    align-items: end;
+    align-self: end;
 }
 .send-arrow-feed {
     margin-top: 13px;
