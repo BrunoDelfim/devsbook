@@ -23,4 +23,6 @@
         public function findByEmail($email);
         // método para definir as informações do usuário
         public function update(User $u);
+        // método para inserir as informações do usuário
+        public function insert(User $u);
     }
