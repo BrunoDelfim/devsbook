@@ -33,11 +33,15 @@ if (document.querySelector(".tab-item")) {
   });
 }
 
+/** @type {HTMLTextAreaElement} */
 let initial_value = document
   .querySelector(".feed-new-input-placeholder")
   .value.trim();
+/** @type {HTMLInputElement} */
 let feedSubmit = document.querySelector(".feed-new-send");
+/** @type {HTMLInputElement} */
 let arrowSendFeed = document.querySelector(".send-arrow-feed");
+/** @type {HTMLTextAreaElement} */
 let content = document.querySelector(".feed-new-input-placeholder");
 
 (function () {
@@ -58,9 +62,10 @@ content.addEventListener("input", function () {
     arrowSendFeed.style.cursor = "default";
     arrowSendFeed.style.opacity = "0.3";
   }
-  this.style.height = 'auto';
+  this.style.height = "initial";
   this.style.height = this.scrollHeight + "px";
 });
+
 
 content.addEventListener("focus", function (obj) {
   let value = this.value.trim();
