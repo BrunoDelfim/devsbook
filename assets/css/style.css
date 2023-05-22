@@ -232,6 +232,7 @@ header .head-side {
     font-family: 'Arial', 'Roboto', sans-serif;
     margin-top: 17px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 .feed-new-input {
     flex:1;

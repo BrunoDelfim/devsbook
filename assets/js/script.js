@@ -58,6 +58,8 @@ content.addEventListener("input", function () {
     arrowSendFeed.style.cursor = "default";
     arrowSendFeed.style.opacity = "0.3";
   }
+  this.style.height = 'auto';
+  this.style.height = `${this.scrollHeight}px`;
 });
 
 content.addEventListener("focus", function (obj) {
