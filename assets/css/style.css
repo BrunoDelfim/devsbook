@@ -208,6 +208,8 @@ header .head-side {
 }
 .feed-new-editor {
     /*align-items: center;*/
+    display: flex;
+    align-items: start;
 }
 .feed-new-avatar {
     margin-right:10px;

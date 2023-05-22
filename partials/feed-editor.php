@@ -13,7 +13,7 @@
                 <img src="<?=$base."/";?>media/avatars/<?=$userInfo->avatar;?>"  alt=""/>
             </div>
             <label class="feed-new-input">
-                <textarea id="myTextarea" rows="1" type="text" class="feed-new-input-placeholder">O que você está pensando, <?=$firstName;?>?</textarea>
+                <textarea id="myTextarea" rows="1" class="feed-new-input-placeholder">O que você está pensando, <?=$firstName;?>?</textarea>
             </label>
             <div class="feed-new-send">
                 <input type="image" alt="" src="<?=$base."/";?>assets/images/send.png" class="send-arrow-feed"/>
