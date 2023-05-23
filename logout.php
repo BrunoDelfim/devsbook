@@ -5,5 +5,5 @@ require 'config.php';
 /** @var object $base **/
 
 unset($_SESSION['token']);
-header("Location: ".$base);
+header("Location: " . $base);
 exit;

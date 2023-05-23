@@ -3,7 +3,8 @@
 require_once 'models/User.php';
 
 // classe de acesso das informações do usuário utilizando mysql e implementando a interface UserDAO
-class UserDaoMysql implements UserDAO {
+class UserDaoMysql implements UserDAO
+{
 
     // variável que irá armazenar o valor recebido na criação do objeto
     private $pdo;
@@ -43,7 +44,7 @@ class UserDaoMysql implements UserDAO {
             // executa o sql que irá consultar o banco
             $sql->execute();
             // se a consulta retornar dados
-            if  ($sql->rowCount() > 0) {
+            if ($sql->rowCount() > 0) {
                 // armazena o primeiro valor retornado na consulta e armazena em $data
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
                 // cria o objeto usuário
@@ -66,7 +67,7 @@ class UserDaoMysql implements UserDAO {
             // executa o sql que irá consultar o banco
             $sql->execute();
             // se a consulta retornar dados
-            if  ($sql->rowCount() > 0) {
+            if ($sql->rowCount() > 0) {
                 // armazena o primeiro valor retornado na consulta e armazena em $data
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
                 // cria o objeto usuário
@@ -123,7 +124,7 @@ class UserDaoMysql implements UserDAO {
         // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
         $sql->bindValue(':password', $u->password);
-        $sql->bindValue(':name', $u->name   );
+        $sql->bindValue(':name', $u->name);
         $sql->bindValue(':birthdate', $u->birthdate);
         $sql->bindValue(':token', $u->token);
         // executa o sql

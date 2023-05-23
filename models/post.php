@@ -1,6 +1,7 @@
 <?php
 
-class Post {
+class Post
+{
     public $id;
     public $id_user;
     public $type; // text or|and photo
@@ -8,6 +9,7 @@ class Post {
     public $body;
 }
 
-interface PostDAO {
+interface PostDAO
+{
     public function insert(Post $p);
 }

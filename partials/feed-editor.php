@@ -10,16 +10,17 @@
     <div class="box-body">
         <div class="feed-new-editor m-10 row">
             <div class="feed-new-avatar">
-                <img src="<?=$base."/";?>media/avatars/<?=$userInfo->avatar;?>"  alt=""/>
+                <img src="<?= $base . "/"; ?>media/avatars/<?= $userInfo->avatar; ?>" alt="" />
             </div>
             <label class="feed-new-input">
-                <textarea id="myTextarea" rows="1" class="feed-new-input-placeholder">O que você está pensando, <?=$firstName;?>?</textarea>
+                <textarea id="myTextarea" rows="1"
+                    class="feed-new-input-placeholder">O que você está pensando, <?= $firstName; ?>?</textarea>
             </label>
             <div class="feed-new-send">
-                <input type="image" alt="" src="<?=$base."/";?>assets/images/send.png" class="send-arrow-feed"/>
+                <input type="image" alt="" src="<?= $base . "/"; ?>assets/images/send.png" class="send-arrow-feed" />
             </div>
-            <form action="<?=$base."/";?>feed_editor_action.php" method="POST" class="feed-new-form">
-                <input type="hidden" name="body"/>
+            <form action="<?= $base . "/"; ?>feed_editor_action.php" method="POST" class="feed-new-form">
+                <input type="hidden" name="body" />
             </form>
         </div>
     </div>

@@ -6,12 +6,12 @@ require 'models/Auth.php';
 /** @var object $pdo **/
 /** @var object $base **/
 
-$auth = new Auth($pdo, $base);
-$userInfo = $auth->checkToken();
+$auth       = new Auth($pdo, $base);
+$userInfo   = $auth->checkToken();
 $activeMenu = 'home';
 
 require 'partials/header.php';
-require  'partials/menu.php';
+require 'partials/menu.php';
 
 ?>
 
@@ -29,8 +29,10 @@ require  'partials/menu.php';
                     </div>
                 </div>
                 <div class="box-body">
-                    <a href=""><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"  alt=""/></a>
-                    <a href=""><img src="https://cdn.pixabay.com/photo/2016/12/27/21/03/lone-tree-1934897__480.jpg"  alt=""/></a>
+                    <a href=""><img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                            alt="" /></a>
+                    <a href=""><img src="https://cdn.pixabay.com/photo/2016/12/27/21/03/lone-tree-1934897__480.jpg"
+                            alt="" /></a>
                 </div>
             </div>
             <div class="box">

@@ -1,7 +1,8 @@
 <?php
 
 require_once 'dao/UserDaoMysql.php';
-class Auth {
+class Auth
+{
 
     // criando as variáveis para armazenar os dados recebidos
     private $pdo;
@@ -11,30 +12,30 @@ class Auth {
     // método que que recebe os valores de $pdo e $base e armazena nas variáveis privadas
     public function __construct(PDO $pdo, $base)
     {
-        $this->pdo = $pdo;
+        $this->pdo  = $pdo;
         $this->base = $base;
-        $this->dao = new UserDaoMysql($this->pdo);
+        $this->dao  = new UserDaoMysql($this->pdo);
     }
 
     // verifica o estado do token de acesso
     public function checkToken()
     {
         // se o token não for vazio
-        if(!empty($_SESSION['token'])){
+        if (!empty($_SESSION['token'])) {
             // armazena o valor do token na variável $token
             $token = $_SESSION['token'];
-            $user = $this->dao->findByToken($token);
+            $user  = $this->dao->findByToken($token);
             if ($user) {
                 return $user;
             }
             return false;
         }
         // se o token for vazio, redireciona para a página login.php
-        header("Location: ".$this->base."/login.php");
+        header("Location: " . $this->base . "/login.php");
         exit;
     }
 
-    public function validateLogin($email, $password):bool
+    public function validateLogin($email, $password): bool
     {
         // executa o método para encontrar o usuário pelo email informado
         $user = $this->dao->findByEmail($email);
@@ -43,7 +44,7 @@ class Auth {
             // verifica se senha está correta
             if (password_verify($password, $user->password)) {
                 // gera o token
-                $token = md5(time().rand(0, 9999));
+                $token = md5(time() . rand(0, 9999));
                 // armazena o token na sessão 'token'
                 $_SESSION['token'] = $token;
                 // define o token do usuário no objeto usuário
@@ -74,13 +75,13 @@ class Auth {
         // define o hash que será gerado a partir da senha informada
         $hash = password_hash($password, PASSWORD_DEFAULT);
         // define o token da sessão usando md5
-        $token = md5(time().rand(0, 9999));
+        $token = md5(time() . rand(0, 9999));
         // define as informações do objeto usário criado
-        $newUser->name = $name;
-        $newUser->email = $email;
-        $newUser->password = $hash;
+        $newUser->name      = $name;
+        $newUser->email     = $email;
+        $newUser->password  = $hash;
         $newUser->birthdate = $birthdate;
-        $newUser->token = $token;
+        $newUser->token     = $token;
         // passa o objeto usuário para o método insert da classe UserDaoMysql
         $this->dao->insert($newUser);
         // define o token da sessão
