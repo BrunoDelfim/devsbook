@@ -2,6 +2,7 @@
 
 require 'config.php';
 require 'models/Auth.php';
+require 'dao/UserRelationDaoMysql.php';
 
 /** @var object $pdo **/
 /** @var object $base **/
@@ -11,7 +12,8 @@ $userInfo   = $auth->checkToken();
 $activeMenu = 'home';
 
 // 1. Lista dos usuários que EU sigo
-
+$urDao = new UserRelationDaoMysql($pdo);
+$userList = $urDao->getRelationsFrom($userInfo->id);
 // 2. Pegar os posts dessa galera ordenado pela data DESC
 
 // 3. Transformar o resultado em objetos dos models
