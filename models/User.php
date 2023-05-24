@@ -24,6 +24,7 @@ interface UserDAO
     // método para encontrar o usuário por email
     public function findByEmail($email);
     // método para definir as informações do usuário
+    public function findById($id);
     public function update(User $u);
     // método para inserir as informações do usuário
     public function insert(User $u);

@@ -56,6 +56,30 @@ class UserDaoMysql implements UserDAO
         // caso o token informado não seja encontrado retorna falso
         return false;
     }
+    
+    public function findById($id)
+    {
+        // se o token estiver preenchido
+        if ($token) {
+            // prepara o sql que irá consultar o banco de dados
+            $sql = $this->pdo->prepare("SELECT * FROM users 
+                                        WHERE id = :id");
+            $sql->bindValue(':id', $id);
+            // executa o sql que irá consultar o banco
+            $sql->execute();
+            // se a consulta retornar dados
+            if ($sql->rowCount() > 0) {
+                // armazena o primeiro valor retornado na consulta e armazena em $data
+                $data = $sql->fetch(PDO::FETCH_ASSOC);
+                // cria o objeto usuário
+                $user = $this->generateUser($data);
+                // retorna o objeto criado
+                return $user;
+            }
+        }
+        // caso o token informado não seja encontrado retorna falso
+        return false;
+    }
 
     public function findByEmail($email)
     {
