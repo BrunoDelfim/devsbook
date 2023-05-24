@@ -19,17 +19,17 @@ class UserDaoMysql implements UserDAO
     // método que cria e armazena as informações do objeto usuário
     private function generateUser($array)
     {
-        $u = new User();
-        $u->id = $array['id'] ?? 0;
-        $u->email = $array['email'] ?? 0;
-        $u->name = $array['name'] ?? 0;
-        $u->password = $array['password'] ?? 0;
+        $u            = new User();
+        $u->id        = $array['id'] ?? 0;
+        $u->email     = $array['email'] ?? 0;
+        $u->name      = $array['name'] ?? 0;
+        $u->password  = $array['password'] ?? 0;
         $u->birthdate = $array['birthdate'] ?? 0;
-        $u->city = $array['city'] ?? 0;
-        $u->work = $array['work'] ?? 0;
-        $u->avatar = $array['avatar'] ?? 0;
-        $u->cover = $array['cover'] ?? 0;
-        $u->token = $array['token'] ?? 0;
+        $u->city      = $array['city'] ?? 0;
+        $u->work      = $array['work'] ?? 0;
+        $u->avatar    = $array['avatar'] ?? 0;
+        $u->cover     = $array['cover'] ?? 0;
+        $u->token     = $array['token'] ?? 0;
         return $u;
     }
 
