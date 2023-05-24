@@ -11,11 +11,14 @@ $auth       = new Auth($pdo, $base);
 $userInfo   = $auth->checkToken();
 $activeMenu = 'home';
 
-require 'partials/header.php';
-require 'partials/menu.php';
-
 $postDao = new PostDaoMysql($pdo);
 $feed = $postDao->getHomeFeed($userInfo->id);
+echo '<pre>';
+print_r($feed);
+exit;
+
+require 'partials/header.php';
+require 'partials/menu.php';
 
 ?>
 

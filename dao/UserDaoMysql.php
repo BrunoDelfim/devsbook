@@ -60,7 +60,7 @@ class UserDaoMysql implements UserDAO
     public function findById($id)
     {
         // se o token estiver preenchido
-        if ($token) {
+        if ($id) {
             // prepara o sql que irá consultar o banco de dados
             $sql = $this->pdo->prepare("SELECT * FROM users 
                                         WHERE id = :id");

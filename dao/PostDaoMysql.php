@@ -31,13 +31,13 @@ class PostDaoMysql implements PostDao
     public function getHomeFeed($id_user)
     {
         // 1. Lista dos usuários que EU sigo
-        $urDao    = new UserRelationDaoMysql($this->pdo);
-        $userList = $urDao->getRelationsFrom($id_user->id);
+        $urDao = new UserRelationDaoMysql($this->pdo);
+        $userList = $urDao->getRelationsFrom($id_user);
         // 2. Pegar os posts dessa galera ordenado pela data DESC
         $sql = $this->pdo->query("SELECT * FROM posts
             WHERE id_user IN (" . implode(',', $userList) . ")
             ORDER BY created_at DESC");
-        if ($sql->rowCount()) {
+        if ($sql->rowCount() > 0) {
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             // 3. Transformar o resultado em objetos dos models
             $array = $this->_postListToObeject($data, $id_user);
@@ -54,7 +54,6 @@ class PostDaoMysql implements PostDao
         foreach($post_list as $post_item) {
             $newPost = new Post();
             $newPost->id = $post_item['id'];
-            $newPost->id_user = $post_item['id_user'];
             $newPost->type = $post_item['type'];
             $newPost->created_at = $post_item['created_at'];
             $newPost->body = $post_item['body'];
@@ -63,8 +62,13 @@ class PostDaoMysql implements PostDao
                 $newPost->my = true;
             }
             // pegar informações do usuário
-            
-            $posts = $newPost;
+            $newPost->user = $userDao->findById($post_item['id_user']);
+            // pegar informções sobre likes
+            $newPost->likeCount = 0;
+            $newPost->liked = false;
+            // pegar informações sobre os comentários
+            $newPost->comments = [];
+            $posts[] = $newPost;
         }
         return $posts;
     }
