@@ -41,6 +41,9 @@
     color:#333;
     line-height: 20px;
     font-size:14px;
+    max-width: 543px;
+    display: flex;
+    justify-content: center;
 }
 .feed-item-body img {
     max-width:100%;
@@ -114,4 +117,13 @@
 .feed-new-comment-label {
     display: flex;
     flex: 1;
+}
+.feed-post-body {
+    font-family: 'Arial', 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap;
+    text-align: justify;
+    max-width: 468px;
+    width: 100%;
 }

@@ -33,10 +33,7 @@ switch ($item->type) {
             </div>
         </div>
         <div class="feed-item-body mt-10 m-width-20">
-            <?php
-                $text = $item->body;
-                echo nl2br(str_replace(' ', '&nbsp;',(wordwrap($text, 84, '<br/>', true))));
-            ?>
+                <?="<p class='feed-post-body'>".$item->body."</p>"?>
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
             <div class="like-btn <?=$item->liked ? 'on' : '';?>"><?=$item->likeCount?></div>
