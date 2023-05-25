@@ -33,7 +33,6 @@ require 'partials/menu.php';
                     }
                 }
             ?>
-
         </div>
         <div class="column side pl-5">
             <div class="box banners">
