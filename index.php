@@ -27,10 +27,13 @@ require 'partials/menu.php';
         <div class="column pr-5">
             <?php require 'partials/feed-editor.php'; ?>
             <?php
-                foreach ($feed as $item) {
-                    require 'partials/feed-item.php';
+                if ($feed) {
+                    foreach ($feed as $item) {
+                        require 'partials/feed-item.php';
+                    }
                 }
             ?>
+
         </div>
         <div class="column side pl-5">
             <div class="box banners">

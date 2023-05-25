@@ -25,7 +25,7 @@ require 'config.php';
     <section class="container main">
         <form method="POST" action="<?= $base . "/"; ?>login_action.php">
             <label>
-                <input placeholder="Digite seu e-mail" class="input" type="email" name="email" />
+                <input placeholder="Digite seu e-mail" class="input" type="text" name="email" />
             </label>
             <label>
                 <input placeholder="Digite sua senha" class="input" type="password" name="password" />

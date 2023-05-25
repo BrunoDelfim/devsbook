@@ -43,11 +43,10 @@ class PostDaoMysql implements PostDao
             $array = $this->_postListToObeject($data, $id_user);
 
         }
-        return $array;
-
+        return $array ?? [];
     }
 
-    private function _postListToObeject($post_list, $id_user)
+    private function _postListToObeject($post_list, $id_user): array
     {
         $posts = [];
         $userDao = new UserDaoMysql($this->pdo);

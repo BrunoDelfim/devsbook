@@ -86,8 +86,8 @@ class UserDaoMysql implements UserDAO
         // se o token estiver preenchido
         if ($email) {
             // prepara o sql que irá consultar o banco de dados
-            $sql = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
-            $sql->bindValue(':email', $email);
+            $sql = $this->pdo->prepare("SELECT * FROM users WHERE email LIKE :email");
+            $sql->bindValue(':email', $email.'@%');
             // executa o sql que irá consultar o banco
             $sql->execute();
             // se a consulta retornar dados

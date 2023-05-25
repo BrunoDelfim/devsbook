@@ -7,7 +7,7 @@ require 'models/Auth.php';
 /** @var object $pdo */
 
 // variável que irá armazenar os valores contidos nos inputs
-$email    = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$email    = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
 // se os inputs tiverem preenchidos
 if ($email && $password) {
