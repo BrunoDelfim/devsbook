@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/User.php';
+require_once 'dao/UserRelationDaoMysql.php';
 
 // classe de acesso das informações do usuário utilizando mysql e implementando a interface UserDAO
 class UserDaoMysql implements UserDAO
@@ -17,7 +18,7 @@ class UserDaoMysql implements UserDAO
     }
 
     // método que cria e armazena as informações do objeto usuário
-    private function generateUser($array)
+    private function generateUser($array, $full = false)
     {
         $u            = new User();
         $u->id        = $array['id'] ?? 0;
@@ -30,6 +31,17 @@ class UserDaoMysql implements UserDAO
         $u->avatar    = $array['avatar'] ?? 0;
         $u->cover     = $array['cover'] ?? 0;
         $u->token     = $array['token'] ?? 0;
+
+        if ($full) {
+            $urDaoMySql = new UserRelationDaoMysql($this->pdo);
+            // quem segue o usuário
+            $u->followers = $urDaoMySql->getFollowers($u->id);
+            // quem o usuário segue
+            $u->following = $urDaoMySql->getFollowing($u->id);
+            // fotos do usuário
+            $u->photos = [];
+        }
+
         return $u;
     }
 
@@ -57,10 +69,10 @@ class UserDaoMysql implements UserDAO
         return false;
     }
 
-    public function findById($id)
+    public function findById($id, $full = false)
     {
         // se o token estiver preenchido
-        if ($id) {
+        if (!empty($id)) {
             // prepara o sql que irá consultar o banco de dados
             $sql = $this->pdo->prepare("SELECT * FROM users 
                                         WHERE id = :id");
@@ -72,7 +84,7 @@ class UserDaoMysql implements UserDAO
                 // armazena o primeiro valor retornado na consulta e armazena em $data
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
                 // cria o objeto usuário
-                $user = $this->generateUser($data);
+                $user = $this->generateUser($data, $full);
                 // retorna o objeto criado
                 return $user;
             }

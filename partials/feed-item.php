@@ -20,10 +20,10 @@ switch ($item->type) {
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
-                <a href="<?=$base."/"?>perfil.php?id=<?=$item->user->id?>"><img src="<?=$base."/"?>media/avatars/<?=$item->user->avatar?>" alt=""/></a>
+                <a href="<?=$base."/"?>profile.php?id=<?=$item->user->id?>"><img src="<?=$base."/"?>media/avatars/<?=$item->user->avatar?>" alt=""/></a>
             </div>
             <div class="feed-item-head-info">
-                <a href="<?=$base."/"?>perfil.php?id=<?=$item->user->id?>"><span class="fidi-name"><?=$item->user->name?></span></a>
+                <a href="<?=$base."/"?>profile.php?id=<?=$item->user->id?>"><span class="fidi-name"><?=$item->user->name?></span></a>
                 <span class="fidi-action"><?=$actionPhrase?></span>
                 <br/>
                 <span class="fidi-date"><?=date('d/m/Y', strtotime($item->created_at))?></span>
@@ -43,7 +43,7 @@ switch ($item->type) {
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
-                    <a href="<?=$base."/"?>perfil.php"><img src="<?=$base."/"?>media/avatars/<?=$userInfo->avatar?>"  alt=""/></a>
+                    <a href="<?=$base."/"?>profile.php"><img src="<?=$base."/"?>media/avatars/<?=$userInfo->avatar?>"  alt=""/></a>
                 </div>
                 <label class="feed-new-comment-label">
                     <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />

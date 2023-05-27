@@ -35,7 +35,7 @@ $firstName = current(explode(" ", $userInfo->name));
                     </div>
                 </div>
                 <div class="head-side-right">
-                    <a href="<?= $base . "/"; ?>perfil.php" class="user-area">
+                    <a href="<?= $base . "/"; ?>profile.php" class="user-area">
                         <div class="user-area-text">
                             <?= $firstName; ?>
                         </div>

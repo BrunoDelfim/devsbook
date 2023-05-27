@@ -32,7 +32,8 @@ class PostDaoMysql implements PostDao
     {
         // 1. Lista dos usuários que EU sigo
         $urDao = new UserRelationDaoMysql($this->pdo);
-        $userList = $urDao->getRelationsFrom($id_user);
+        $userList = $urDao->getFollowing($id_user);
+        $userList[] = $id_user;
         // 2. Pegar os posts dessa galera ordenado pela data DESC
         $sql = $this->pdo->query("SELECT * FROM posts
             WHERE id_user IN (" . implode(',', $userList) . ")
@@ -40,13 +41,13 @@ class PostDaoMysql implements PostDao
         if ($sql->rowCount() > 0) {
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             // 3. Transformar o resultado em objetos dos models
-            $array = $this->_postListToObeject($data, $id_user);
+            $array = $this->_postListToObject($data, $id_user);
 
         }
         return $array ?? [];
     }
 
-    private function _postListToObeject($post_list, $id_user): array
+    private function _postListToObject($post_list, $id_user): array
     {
         $posts = [];
         $userDao = new UserDaoMysql($this->pdo);
