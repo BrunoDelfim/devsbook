@@ -56,7 +56,7 @@ class UserDaoMysql implements UserDAO
         // caso o token informado não seja encontrado retorna falso
         return false;
     }
-    
+
     public function findById($id)
     {
         // se o token estiver preenchido
@@ -87,7 +87,7 @@ class UserDaoMysql implements UserDAO
         if ($email) {
             // prepara o sql que irá consultar o banco de dados
             $sql = $this->pdo->prepare("SELECT * FROM users WHERE email LIKE :email");
-            $sql->bindValue(':email', $email.'@%');
+            $sql->bindValue(':email', $email . '@%');
             // executa o sql que irá consultar o banco
             $sql->execute();
 
