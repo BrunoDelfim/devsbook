@@ -9,11 +9,15 @@ require 'dao/PostDaoMysql.php';
 
 $auth       = new Auth($pdo, $base);
 $userInfo   = $auth->checkToken();
-$activeMenu = 'profile';
 
 $id = filter_input(INPUT_GET, 'id');
+
 if (!$id) {
     $id = $userInfo->id;
+}
+
+if ($userInfo->id === $id) {
+    $activeMenu = 'profile';
 }
 
 $postDao = new PostDaoMysql($pdo);
