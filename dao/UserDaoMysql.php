@@ -90,10 +90,22 @@ class UserDaoMysql implements UserDAO
             $sql->bindValue(':email', $email.'@%');
             // executa o sql que irá consultar o banco
             $sql->execute();
+
+            $sqlFullEmail = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+            $sqlFullEmail->bindValue(':email', $email);
+            $sqlFullEmail->execute();
+
             // se a consulta retornar dados
             if ($sql->rowCount() > 0) {
                 // armazena o primeiro valor retornado na consulta e armazena em $data
                 $data = $sql->fetch(PDO::FETCH_ASSOC);
+                // cria o objeto usuário
+                $user = $this->generateUser($data);
+                // retorna o objeto criado
+                return $user;
+            } else if ($sqlFullEmail->rowCount() > 0) {
+                // armazena o primeiro valor retornado na consulta e armazena em $data
+                $data = $sqlFullEmail->fetch(PDO::FETCH_ASSOC);
                 // cria o objeto usuário
                 $user = $this->generateUser($data);
                 // retorna o objeto criado
