@@ -14,6 +14,9 @@ class User
     public $avatar;
     public $cover;
     public $token;
+    public $following;
+    public $followers;
+    public $photos;
 }
 
 // interface com padronização para acessar os dados dos usuários

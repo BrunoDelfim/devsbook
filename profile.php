@@ -16,8 +16,10 @@ if (!$id) {
     $id = $userInfo->id;
 }
 
-if ($userInfo->id === $id) {
+if ($userInfo->id === intval($id)) {
     $activeMenu = 'profile';
+} else {
+    $activeMenu = '';
 }
 
 $postDao = new PostDaoMysql($pdo);
@@ -123,7 +125,7 @@ require 'partials/menu.php';
                             <div class="friend-icon">
                                 <a href="">
                                     <div class="friend-icon-avatar">
-                                        <img src="media/avatars/avatar.jpg" />
+                                        <img src="<?= $base . "/" ?>media/avatars/default.jpg" />
                                     </div>
                                     <div class="friend-icon-name">
                                         Bonieky

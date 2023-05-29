@@ -7,6 +7,11 @@ class Post
     public $type; // text or|and photo
     public $created_at;
     public $body;
+    public $my = false;
+    public $liked = false;
+    public $comments = [];
+    public $user;
+    public $likeCount = 0;
 }
 
 interface PostDAO
