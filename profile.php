@@ -135,7 +135,7 @@ require 'partials/menu.php';
                     <?php if (count($user->following) > 0): ?>
                         <?php foreach($user->following as $item): ?>
                             <div class="friend-icon">
-                                <a href="<?=$base."/"?>profile.php?id=<?=$item->id?>">
+                                <a href="<?=$base."/"?>profile.php?id=<?=$item->id?>" title="<?=$item->name?>">
                                     <div class="friend-icon-avatar">
                                         <img src="<?= $base . "/" ?>media/avatars/<?=$item->avatar?>" />
                                     </div>
