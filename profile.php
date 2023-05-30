@@ -25,7 +25,7 @@ if ($userInfo->id === intval($id)) {
 $postDao = new PostDaoMysql($pdo);
 $userDao = new UserDaoMysql($pdo);
 
-// Pegar informaÃ§Ãµes do usuÃ¡rio
+// Pegar informações do usuário
 $user = $userDao->findById($id, true);
 if (!$user) {
     header("Location: " . $base);
@@ -36,10 +36,22 @@ $dateFrom = new DateTime($user->birthdate);
 $dateTo   = new DateTime('today');
 $user->ageYears = $dateFrom->diff($dateTo)->y;
 
-// Pegar o feed do usuÃ¡rio
+function getFriendNameToList($nome) {
+    $nomeCompleto = str_word_count($nome);
+    if ($nomeCompleto > 1) {
+        $nome = explode(" ", $nome);
+        $primeiroNome = $nome[0];
+        $segundoNome = strlen($nome[1]) > 2 ? substr($nome[1], 0, 1) : substr($nome[2], 0, 1);
+        $nomeExibir = $primeiroNome . " " . $segundoNome . ".";
+    } else {
+        $nomeExibir = $nome;
+    }
+    return $nomeExibir;
+}
 
+// Pegar o feed do usuário
 
-// Verificar se eu sigo o usuÃ¡rio
+// Verificar se eu sigo o usuário
 
 // $feed = $postDao->getHomeFeed($userInfo->id);
 
@@ -123,12 +135,12 @@ require 'partials/menu.php';
                     <?php if (count($user->following) > 0): ?>
                         <?php foreach($user->following as $item): ?>
                             <div class="friend-icon">
-                                <a href="">
+                                <a href="<?=$base."/"?>profile.php?id=<?=$item->id?>">
                                     <div class="friend-icon-avatar">
-                                        <img src="<?= $base . "/" ?>media/avatars/default.jpg" />
+                                        <img src="<?= $base . "/" ?>media/avatars/<?=$item->avatar?>" />
                                     </div>
                                     <div class="friend-icon-name">
-                                        Bonieky
+                                        <?= getFriendNameToList($item->name)?>
                                     </div>
                                 </a>
                             </div>
@@ -144,10 +156,10 @@ require 'partials/menu.php';
                 <div class="box-header m-10">
                     <div class="box-header-text">
                         Fotos
-                        <span>(12)</span>
+                        <span><?=count($user->photos)?></span>
                     </div>
                     <div class="box-header-buttons">
-                        <a href="">ver todos</a>
+                        <a href="<?= $base . "/" ?>/photos.php?id=<?=$user->id?>">ver todos</a>
                     </div>
                 </div>
                 <div class="box-body row m-20">
@@ -245,7 +257,7 @@ require 'partials/menu.php';
                             <div class="fic-item-photo">
                                 <a href=""><img src="media/avatars/avatar.jpg" /></a>
                             </div>
-                            <input type="text" class="fic-item-field" placeholder="Escreva um comentÃ¡rio" />
+                            <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
                         </div>
 
                     </div>

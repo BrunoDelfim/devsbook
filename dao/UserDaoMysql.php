@@ -3,17 +3,17 @@
 require_once 'models/User.php';
 require_once 'dao/UserRelationDaoMysql.php';
 
-// classe de acesso das informações do usuário utilizando mysql e implementando a interface UserDAO
+// classe de acesso das informaçõeses do usuário utilizando mysql e implementando a interface UserDAO
 class UserDaoMysql implements UserDAO
 {
 
     // variável que irá armazenar o valor recebido na criação do objeto
     private $pdo;
 
-    // função que irá receber o valor passado ($pdo) quando o objeto for criado
+    // fução que irá receber o valor passado ($pdo) quando o objeto for criado
     public function __construct(PDO $driver)
     {
-        // atribui o valor recebido a variável $pdo
+        // atribui o valor recebido a variÃ¡vel $pdo
         $this->pdo = $driver;
     }
 
@@ -36,8 +36,16 @@ class UserDaoMysql implements UserDAO
             $urDaoMySql = new UserRelationDaoMysql($this->pdo);
             // quem segue o usuário
             $u->followers = $urDaoMySql->getFollowers($u->id);
+            foreach($u->followers as $key => $follower_id) {
+                $newUser = $this->findById($follower_id);
+                $u->followers[$key] = $newUser;
+            }
             // quem o usuário segue
             $u->following = $urDaoMySql->getFollowing($u->id);
+            foreach($u->following as $key => $following_id) {
+                $newUser = $this->findById($following_id);
+                $u->following[$key] = $newUser;
+            }
             // fotos do usuário
             $u->photos = [];
         }
@@ -162,7 +170,7 @@ class UserDaoMysql implements UserDAO
     // método que insere novos usuários no banco de dados
     public function insert(User $u)
     {
-        // prepara a inserção sql
+        // prepara a inserÃ§Ã£o sql
         $sql = $this->pdo->prepare("INSERT INTO users (
             email, password, name, birthdate, token, city, work, avatar, cover   
     ) VALUES (

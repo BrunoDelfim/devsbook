@@ -14,8 +14,8 @@ class User
     public $avatar;
     public $cover;
     public $token;
-    public $following;
     public $followers;
+    public $following;
     public $photos;
 }
 
