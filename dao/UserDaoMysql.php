@@ -20,29 +20,29 @@ class UserDaoMysql implements UserDAO
     // método que cria e armazena as informações do objeto usuário
     private function generateUser($array, $full = false)
     {
-        $u            = new User();
-        $u->id        = $array['id'] ?? 0;
-        $u->email     = $array['email'] ?? 0;
-        $u->name      = $array['name'] ?? 0;
-        $u->password  = $array['password'] ?? 0;
+        $u = new User();
+        $u->id = $array['id'] ?? 0;
+        $u->email = $array['email'] ?? 0;
+        $u->name = $array['name'] ?? 0;
+        $u->password = $array['password'] ?? 0;
         $u->birthdate = $array['birthdate'] ?? 0;
-        $u->city      = $array['city'] ?? 0;
-        $u->work      = $array['work'] ?? 0;
-        $u->avatar    = $array['avatar'] ?? 0;
-        $u->cover     = $array['cover'] ?? 0;
-        $u->token     = $array['token'] ?? 0;
+        $u->city = $array['city'] ?? 0;
+        $u->work = $array['work'] ?? 0;
+        $u->avatar = $array['avatar'] ?? 0;
+        $u->cover = $array['cover'] ?? 0;
+        $u->token = $array['token'] ?? 0;
 
         if ($full) {
             $urDaoMySql = new UserRelationDaoMysql($this->pdo);
             // quem segue o usuário
             $u->followers = $urDaoMySql->getFollowers($u->id);
-            foreach($u->followers as $key => $follower_id) {
+            foreach ($u->followers as $key => $follower_id) {
                 $newUser = $this->findById($follower_id);
                 $u->followers[$key] = $newUser;
             }
             // quem o usuário segue
             $u->following = $urDaoMySql->getFollowing($u->id);
-            foreach($u->following as $key => $following_id) {
+            foreach ($u->following as $key => $following_id) {
                 $newUser = $this->findById($following_id);
                 $u->following[$key] = $newUser;
             }
@@ -59,7 +59,9 @@ class UserDaoMysql implements UserDAO
         // se o token estiver preenchido
         if ($token) {
             // prepara o sql que irá consultar o banco de dados
-            $sql = $this->pdo->prepare("SELECT * FROM users WHERE token = :token");
+            $sql = $this->pdo->prepare("SELECT  *
+                                        FROM    users
+                                        WHERE   token = :token");
             $sql->bindValue(':token', $token);
             // executa o sql que irá consultar o banco
             $sql->execute();
@@ -82,8 +84,9 @@ class UserDaoMysql implements UserDAO
         // se o token estiver preenchido
         if (!empty($id)) {
             // prepara o sql que irá consultar o banco de dados
-            $sql = $this->pdo->prepare("SELECT * FROM users 
-                                        WHERE id = :id");
+            $sql = $this->pdo->prepare("SELECT  *
+                                        FROM    users 
+                                        WHERE   id = :id");
             $sql->bindValue(':id', $id);
             // executa o sql que irá consultar o banco
             $sql->execute();
@@ -106,12 +109,16 @@ class UserDaoMysql implements UserDAO
         // se o token estiver preenchido
         if ($email) {
             // prepara o sql que irá consultar o banco de dados
-            $sql = $this->pdo->prepare("SELECT * FROM users WHERE email LIKE :email");
+            $sql = $this->pdo->prepare("SELECT  *
+                                        FROM    users
+                                        WHERE   email LIKE :email");
             $sql->bindValue(':email', $email . '@%');
             // executa o sql que irá consultar o banco
             $sql->execute();
 
-            $sqlFullEmail = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
+            $sqlFullEmail = $this->pdo->prepare("SELECT *
+                                                 FROM   users
+                                                 WHERE  email = :email");
             $sqlFullEmail->bindValue(':email', $email);
             $sqlFullEmail->execute();
 
@@ -139,16 +146,17 @@ class UserDaoMysql implements UserDAO
     public function update(User $u)
     {
         // prepara a atualização do usuário no banco de dados conforme o token
-        $sql = $this->pdo->prepare("UPDATE users SET
-            email = :email,
-            password = :password,
-            name = :name,
-            birthdate = :birthdate,
-            city = :city,
-            work = :work,
-            avatar = :avatar,
-            cover = :cover,
-            token = :token
+        $sql = $this->pdo->prepare("UPDATE users
+            SET
+                email = :email,
+                password = :password,
+                name = :name,
+                birthdate = :birthdate,
+                city = :city,
+                work = :work,
+                avatar = :avatar,
+                cover = :cover,
+                token = :token
             WHERE id = :id");
         // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
@@ -172,11 +180,25 @@ class UserDaoMysql implements UserDAO
     {
         // prepara a inserÃ§Ã£o sql
         $sql = $this->pdo->prepare("INSERT INTO users (
-            email, password, name, birthdate, token, city, work, avatar, cover   
-    ) VALUES (
-            :email, :password, :name, :birthdate, :token,
-              default, default, 'default.jpg', 'cover.jpg'
-    )");
+                                                        email,
+                                                        password,
+                                                        name,
+                                                        birthdate,
+                                                        token,
+                                                        city,
+                                                        work,
+                                                        avatar,
+                                                        cover   
+                                                    ) VALUES (
+                                                        :email,
+                                                        :password,
+                                                        :name,
+                                                        :birthdate,
+                                                        :token,
+                                                        default,
+                                                        default,
+                                                        'default.jpg',
+                                                        'cover.jpg')");
         // insere os valores reais no sql
         $sql->bindValue(':email', $u->email);
         $sql->bindValue(':password', $u->password);
