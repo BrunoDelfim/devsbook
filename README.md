@@ -4,6 +4,6 @@
 * MySql
 * Javascript
 * HTML5
-* CSS3
+* CSS 3
 
 *Status do Projeto*: **Em desenvolvimento**.
